@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="~/Content/css/Login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="sidenav">
+        <div class="login-main-text">
+            <h2>Dirección General de Catastro - Provincia de Tucumán</h2>
+            <br />
+            <h3>Página de Inicio de Sesión</h3>
+            <p>Acceder o registrarse desde aquí.</p>
+        </div>
+    </div>
+    <div class="main">
+        <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+                <form action="@Url.Action("Login", "Acceso")" method="post">
+                    <div class="form-group">
+                        <label>Correo:</label>
+                        <input type="text" name="Correo" class="form-control" placeholder="Correo">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña:</label>
+                        <input type="password" name="Clave" class="form-control" placeholder="Contraseña">
+                    </div>
+                    @if (ViewData["Mensaje"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["Mensaje"]
+                        </div>
+                    }
+
+                    <button type="submit" class="btn btn-black">Iniciar Sesión</button>
+                    <a href="@Url.Action("Registrar", "Acceso")" class="register-form">Registrarse</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</body>
+</html>
