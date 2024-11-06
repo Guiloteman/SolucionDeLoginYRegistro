@@ -3,77 +3,69 @@
     Layout = null;
 }
 
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html>
 <head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link href="~/Content/css/Login.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="sidenav">
-        <div class="login-main-text">
-            <h2>Dirección General de Catastro - Provincia de Tucumán</h2>
-            <br />
-            <h3>Página de Inicio de Sesión</h3>
-            <p>Acceder o registrarse desde aquí.</p>
-        </div>
-    </div>
-    <div class="main">
-        <div class="col-md-6 col-sm-12">
-            <div class="login-form">
-                <form action="@Url.Action("Registrar", "Acceso")" method="post">
-                    <div class="form-group">
-                        <label>Nombre:</label>
-                        <input type="text" name="Nombre" class="form-control" placeholder="Nombre">
-                    </div>
-                    <div class="form-group">
-                        <label>Dni:</label>
-                        <input type="number" name="Dni" class="form-control" placeholder="Dni">
-                    </div>
-                    <div class="form-group">
-                        <label>Matrícula:</label>
-                        <input type="number" name="Matricula" class="form-control" placeholder="Matrícula">
-                    </div>
-                    <div class="form-group">
-                        <label>Teléfono:</label>
-                        <input type="tel" name="Telefono" class="form-control" placeholder="Teléfono">
-                    </div>
-                    <div class="form-group">
-                        <label>Número de identificación de rol:</label>
-                        <input type="number" name="Id_Rol" class="form-control" placeholder="Número de identificación de rol">
-                    </div>
-                    <div class="form-group">
-                        <label>Correo:</label>
-                        <input type="email" name="Correo" class="form-control" placeholder="Correo">
-                    </div>
-                    <div class="form-group">
-                        <label>Contraseña:</label>
-                        <input type="password" name="Clave" class="form-control" placeholder="Contraseña">
-                    </div>
-                    <div class="form-group">
-                        <label>Confirmar Contraseña:</label>
-                        <input type="password" name="ConfirmarClave" class="form-control" placeholder="Confirmar Contraseña">
-                    </div>
-                    @if (ViewData["Mensaje"] != null)
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            @ViewData["Mensaje"]
-                        </div>
-                    }
-                    <button type="submit" class="btn btn-black">Registrarse</button>
 
-                </form>
-            </div>
-            <div class="mt-4">
-                <div class="d-flex justify-content-center link-primary">
-                    Ya tienes una cuenta?  <a href="@Url.Action("Login", "Acceso")">Iniciar Sesión</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <header class="header">
+        <a href="./index.html" class="logo">Dirección General de Catastro</a>
+        @*<img src="https://pbs.twimg.com/profile_images/1083007523983163394/ahsIgsyK_400x400.jpg" alt="logo">*@
+        <img src="~/Imagen/images.png" alt="logo">
+        <a href="./index.html" class="logo">Provincia de Tucumán</a>
+    </header>
 
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <form class="form" action="@Url.Action("Registrar", "Acceso")" method="post">
+        <h1 class="title">Registrarse</h1>
+        <label>
+            <i class="fa-solid fa-user"></i>
+            <input name="Nombre" placeholder="nombre" type="text" id="nombre" required>
+        </label>
+
+        <label>
+            <i class="fa-solid fa-passport"></i>
+            <input name="Dni" placeholder="dni" type="number" id="dni" required>
+        </label>
+
+        <label>
+            <i class="fa-solid fa-address-card"></i>
+            <input name="Matricula" placeholder="matricula" type="number" id="matricula" required>
+        </label>
+
+        <label>
+            <i class="fa-solid fa-phone"></i>
+            <input name="Telefono" placeholder="teléfono" type="tel" id="telefono" required>
+        </label>
+
+        <label>
+            <i class="fa-solid fa-envelope"></i>
+            <input name="Correo" placeholder="correo" type="email" id="correo" required>
+        </label>
+
+        <label>
+            <i class="fa-solid fa-lock"></i>
+            <input name="Clave" placeholder="contraseña" type="password" id="clave" required>
+        </label>
+
+        <label>
+            <i class="fa-solid fa-lock"></i>
+            <input name="ConfirmarClave" placeholder="confirmar contraseña" type="password" id="confirmarClave" required>
+        </label>
+
+        
+
+        <button id="button">Registrarse</button>
+    </form>
+
+
+
+
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="/JS/mysql.js"></script>
 </body>
 </html>

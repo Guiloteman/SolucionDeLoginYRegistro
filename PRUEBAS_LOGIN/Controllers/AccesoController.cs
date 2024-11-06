@@ -15,7 +15,7 @@ namespace PRUEBAS_LOGIN.Controllers
     public class AccesoController : Controller
     {
 
-        static string cadena = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\guile\\source\\repos\\SolucionDeLoginYRegistro\\PRUEBAS_LOGIN\\App_Data\\Database1.mdf;Integrated Security=True";
+        static string cadena = "Data Source=dbusuario.database.windows.net;Initial Catalog=pruebasusuario;Persist Security Info=True;User ID=admindb;Password=Lanum120$";
 
         // GET: Acceso
         public ActionResult Login()
@@ -36,26 +36,25 @@ namespace PRUEBAS_LOGIN.Controllers
             bool registrado;
             string mensaje;
 
-            if(oUsuario.Clave == oUsuario.ConfirmarClave)
+            if(oUsuario.clave == oUsuario.confirmarClave)
             {
-                oUsuario.Clave = ConvertirSha256(oUsuario.Clave);
+                oUsuario.clave = ConvertirSha256(oUsuario.clave);
             }
             else
             {
                 ViewData["Mensaje"] = "Las Contraseñas no coinciden";
-                return View();
+                return View(); 
             }
 
             using (SqlConnection cn = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", cn);
-                cmd.Parameters.AddWithValue("Correo", oUsuario.Correo);
-                cmd.Parameters.AddWithValue("Clave", oUsuario.Clave);
-                cmd.Parameters.AddWithValue("Nombre", oUsuario.Nombre);
-                cmd.Parameters.AddWithValue("Dni", oUsuario.Dni);
-                cmd.Parameters.AddWithValue("Matricula", oUsuario.Matricula);
-                cmd.Parameters.AddWithValue("Telefono", oUsuario.Telefono);
-                cmd.Parameters.AddWithValue("Id_Rol", oUsuario.Id_Rol);
+                cmd.Parameters.AddWithValue("Correo", oUsuario.correo);
+                cmd.Parameters.AddWithValue("Clave", oUsuario.clave);
+                cmd.Parameters.AddWithValue("Nombre", oUsuario.nombre);
+                cmd.Parameters.AddWithValue("Dni", oUsuario.dni);
+                cmd.Parameters.AddWithValue("Matricula", oUsuario.matricula);
+                cmd.Parameters.AddWithValue("Telefono", oUsuario.telefono);
                 cmd.Parameters.Add("Registrado", SqlDbType.Bit).Direction = ParameterDirection.Output;
                 cmd.Parameters.Add("Mensaje", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -84,66 +83,35 @@ namespace PRUEBAS_LOGIN.Controllers
         [HttpPost]
         public ActionResult Login(Usuario oUsuario)
         {
-            oUsuario.Clave = ConvertirSha256(oUsuario.Clave);
+            oUsuario.clave = ConvertirSha256(oUsuario.clave);
 
             using (SqlConnection cn = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand("sp_ValidarUsuario", cn);
-                cmd.Parameters.AddWithValue("Correo", oUsuario.Correo);
-                cmd.Parameters.AddWithValue("Clave", oUsuario.Clave);
+                cmd.Parameters.AddWithValue("Correo", oUsuario.correo);
+                cmd.Parameters.AddWithValue("Clave", oUsuario.clave);
                 cmd.CommandType = CommandType.StoredProcedure;
 
+                
                 cn.Open();
-
-                oUsuario.Id_Rol = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                
+                oUsuario.id = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                
             }
 
-            if(oUsuario.Id_Rol == 1)
+
+            if (oUsuario.id != 0) 
             {
                 Session["usuario"] = oUsuario;
-                return RedirectToAction("Index", "Inspector");
+                
+                return RedirectToAction("Index", "ClienteProfesional");
             }
             else
             {
-                if(oUsuario.Id_Rol == 2)
-                {
-                    Session["usuario"] = oUsuario;
-                    return RedirectToAction("Index", "Legales");
-                }else
-                {
-                    if(oUsuario.Id_Rol == 3)
-                    {
-                        Session["usuario"] = oUsuario;
-                        return RedirectToAction("Index", "Director");
-                    }else
-                    {
-                        if(oUsuario.Id_Rol == 4)
-                        {
-                            Session["usuario"] = oUsuario;
-                            return RedirectToAction("Index", "Supervisor");
-                        }else
-                        {
-                            if(oUsuario.Id_Rol == 5)
-                            {
-                                Session["usuario"] = oUsuario;
-                                return RedirectToAction("Index", "Mesa");
-                            }else
-                            {
-                                if (oUsuario.Id_Rol == 6)
-                                {
-                                    Session["usuario"] = oUsuario;
-                                    return RedirectToAction("Index", "ClienteProfesional");
-                                }
-                                else
-                                {
-                                    ViewData["Mensaje"] = "Usuario no encontrado";
-                                    return View();
-                                }
-                            }
-                        }
-                    }
-                }
+                ViewData["Mensaje"] = "Usuario no encontrado";
+                return View();
             }
+                
         }
 
 
@@ -162,5 +130,7 @@ namespace PRUEBAS_LOGIN.Controllers
             }
             return sb.ToString();
         }
+
+      
     }
 }

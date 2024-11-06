@@ -1,0 +1,27 @@
+﻿#container{
+    width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+    height: 60vh;
+}
+
+#cliente{
+    margin-bottom: 20vh;
+    color: aliceblue;
+}
+
+
+#content {
+    background: aliceblue;
+    box-shadow: 0px 3px 5px rgba(15, 15, 15, .5);
+    border-radius: 10px;
+    a{
+        text-decoration: none;
+        font-size: 20px;
+    }
+     a:hover{
+         color: black;
+     }
+}
+
+

@@ -7,17 +7,18 @@ namespace PRUEBAS_LOGIN.Models
 {
     public class Usuario
     {
-        public int Id_Usuario { get; set; }
-        public string Correo { get; set; }
-        public string Clave { get; set; }
-        public string Nombre { get; set; }
-        public int Dni { get; set; }
-        public int Matricula { get; set; }
-        public int Telefono { get; set; }
-        public int Id_Rol { get; set; }
+        public int id { get; set; }
+        public string correo { get; set; }
+        public string clave { get; set; }
+        public string nombre { get; set; }
+        public int dni { get; set; }
+        public int matricula { get; set; }
+        public int telefono { get; set; }
 
 
 
-        public string ConfirmarClave { get; set; }
+
+
+        public string confirmarClave { get; set; }
     }
 }

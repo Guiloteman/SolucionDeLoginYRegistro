@@ -3,7 +3,6 @@
     Layout = null;
 }
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,28 +18,36 @@
         <a href="#" class="logo">Provincia de Tucumán</a>
     </header>
 
-    
+
     <div id="container">
-        
-        <h1 id="cliente">Profesional</h1>
+
+        <h1 id="cliente">Mis Carpetas</h1>
 
         <section id="content">
+            <form action="@Url.Action("Index", "MisCarpetas")" method="post">
+                <label>
+                    <i class="fa-solid fa-user"></i>
+                    <input name="Correo" placeholder="correo" type="email" id="username" required>
+                </label>
 
-            <a href="@Url.Action("PresentarCarpeta", "PresentarCarpeta")" class="link">Presentar Carpeta</a>
-            <br />
-            <br />
-            <br />
-            <a href="@Url.Action("Index", "MisCarpetas")" class="link">Mis Carpetas</a>
-            <br />
-            <br />
-            <br />
-            @Html.ActionLink("Salir", "CerrarSesion", "ClienteProfesional")
+                @if (ViewData["Mensaje"] != null)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @ViewData["Mensaje"]
+                    </div>
+                }
+
+                <button id="button">Acceder</button>
+
+            </form>
+
+                <a href="@Url.Action("Index", "ClienteProfesional")" class="link">Volver</a>
 
         </section>
+        
     </div>
-    
+
 
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="/JS/mysql.js"></script>
 </body>
 </html>

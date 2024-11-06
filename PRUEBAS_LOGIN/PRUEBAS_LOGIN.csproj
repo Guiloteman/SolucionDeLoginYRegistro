@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -122,15 +124,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccesoController.cs" />
     <Compile Include="Controllers\ClienteProfesionalController.cs" />
-    <Compile Include="Controllers\DirectorController.cs" />
-    <Compile Include="Controllers\InspectorController.cs" />
-    <Compile Include="Controllers\LegalesController.cs" />
-    <Compile Include="Controllers\MesaController.cs" />
-    <Compile Include="Controllers\SupervisorController.cs" />
+    <Compile Include="Controllers\MisCarpetasController.cs" />
+    <Compile Include="Controllers\PresentarCarpetaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Carpeta.cs" />
+    <Compile Include="Models\Empleado.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\UsuarioEmpleado.cs" />
     <Compile Include="Permisos\ValidarSesionAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -155,16 +157,22 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\cliente.css" />
     <Content Include="Content\css\Login.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Imagen\images.png" />
+    <Content Include="images.ico" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\PRUEBASLOGIN20241031093137 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\PRUEBASLOGIN20241031093137 - Web Deploy1.pubxml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -186,14 +194,13 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Acceso\Login.cshtml" />
     <Content Include="Views\Acceso\Registrar.cshtml" />
-    <Content Include="Views\Mesa\Index.cshtml" />
-    <Content Include="Views\Inspector\Index.cshtml" />
-    <Content Include="Views\Legales\Index.cshtml" />
-    <Content Include="Views\Director\Index.cshtml" />
-    <Content Include="Views\Supervisor\Index.cshtml" />
     <Content Include="Views\ClienteProfesional\Index.cshtml" />
+    <Content Include="Views\PresentarCarpeta\PresentarCarpeta.cshtml" />
+    <Content Include="Views\MisCarpetas\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
@@ -221,9 +228,14 @@
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
